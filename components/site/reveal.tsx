@@ -1,18 +1,16 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  /** stagger delay in ms */
   delay?: number;
-  as?: ElementType;
 };
 
-export function Reveal({ children, className, delay = 0, as: Tag = "div" }: RevealProps) {
-  const ref = useRef<HTMLElement | null>(null);
+export function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -35,12 +33,12 @@ export function Reveal({ children, className, delay = 0, as: Tag = "div" }: Reve
   }, []);
 
   return (
-    <Tag
-      ref={ref as never}
+    <div
+      ref={ref}
       className={cn("reveal", className)}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </Tag>
+    </div>
   );
 }

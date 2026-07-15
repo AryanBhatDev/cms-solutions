@@ -1,37 +1,133 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Cloud, Lightbulb, Palette, Wrench } from "lucide-react";
+import { useState } from "react";
 import { Reveal } from "./reveal";
 import { ScrollLink } from "./scroll-link";
 
-import serviceManagedImg from "@/public/images/service-managed.webp";
-import serviceStrategyImg from "@/public/images/service-strategy.webp";
-import serviceProfessionalImg from "@/public/images/service-professional.webp";
-import serviceDesignImg from "@/public/images/service-design.webp";
-
-const services: { title: string; desc: string; image: StaticImageData }[] = [
+const services = [
   {
+    icon: Cloud,
     title: "Managed Services",
-    desc: "Increase ICT operational efficiency whilst reducing costs — we handle the infrastructure so you can focus on the business.",
-    image: serviceManagedImg,
+    shortDesc: "24/7 IT infrastructure management",
+    fullDesc: "We handle your entire infrastructure — servers, networks, security, and support — so you can focus on growing your business.",
+    colors: [[59, 130, 246], [99, 102, 241]],
+    bgColor: "bg-blue-900",
   },
   {
+    icon: Lightbulb,
     title: "Strategy Consulting",
-    desc: "Insightful technology guidance that drives measurable innovation, productivity, and competitive advantage.",
-    image: serviceStrategyImg,
+    shortDesc: "Digital transformation roadmaps",
+    fullDesc: "Technology guidance that drives innovation. We create actionable roadmaps aligning tech investments with business outcomes.",
+    colors: [[251, 146, 60], [245, 158, 11]],
+    bgColor: "bg-orange-900",
   },
   {
+    icon: Wrench,
     title: "Professional Services",
-    desc: "Implementation and integration expertise to connect your systems, automate workflows, and support your people.",
-    image: serviceProfessionalImg,
+    shortDesc: "Implementation & integration",
+    fullDesc: "Connect your systems, automate workflows, and support your people. We deliver projects on time with minimal disruption.",
+    colors: [[34, 197, 94], [16, 185, 129]],
+    bgColor: "bg-emerald-900",
   },
   {
+    icon: Palette,
     title: "Design & Marketing",
-    desc: "Digital-first design and marketing services that amplify your brand and convert your audience into customers.",
-    image: serviceDesignImg,
+    shortDesc: "Brand & digital presence",
+    fullDesc: "Digital-first design and marketing that amplifies your brand and converts your audience into loyal customers.",
+    colors: [[236, 72, 153], [147, 51, 234]],
+    bgColor: "bg-pink-900",
   },
 ];
+
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const Icon = service.icon;
+
+  return (
+    <Reveal delay={index * 100}>
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="group relative h-[20rem] overflow-hidden rounded-2xl border border-border bg-card p-2"
+      >
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+        />
+        
+        <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-border/50 bg-background p-5">
+          {/* Canvas Reveal Effect */}
+          <AnimatePresence>
+            {hovered && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 z-0 overflow-hidden rounded-xl"
+              >
+                <CanvasRevealEffect
+                  animationSpeed={3}
+                  containerClassName={cn(service.bgColor, "rounded-xl")}
+                  colors={service.colors}
+                  dotSize={2}
+                />
+                {/* Dark overlay for text readability in both modes */}
+                <div className="absolute inset-0 rounded-xl bg-black/60" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-1 flex-col">
+            {/* Icon */}
+            <div className={cn(
+              "flex size-11 items-center justify-center rounded-lg border transition-all duration-300",
+              hovered 
+                ? "border-white/30 bg-white/10 text-white" 
+                : "border-primary/30 bg-primary/10 text-primary"
+            )}>
+              <Icon className="size-5" />
+            </div>
+
+            {/* Number */}
+            <span className={cn(
+              "mt-3 font-mono text-xs transition-colors duration-300",
+              hovered ? "text-white/60" : "text-muted-foreground"
+            )}>
+              0{index + 1}
+            </span>
+
+            {/* Title */}
+            <h3 className={cn(
+              "mt-1.5 font-heading text-lg font-semibold transition-colors duration-300",
+              hovered ? "text-white" : "text-foreground"
+            )}>
+              {service.title}
+            </h3>
+
+            {/* Description - changes on hover */}
+            <p className={cn(
+              "mt-2 flex-1 text-sm leading-relaxed transition-colors duration-300",
+              hovered ? "text-white/90" : "text-muted-foreground"
+            )}>
+              {hovered ? service.fullDesc : service.shortDesc}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
 
 export function Services() {
   return (
@@ -50,46 +146,9 @@ export function Services() {
           </Reveal>
         </div>
         
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {services.map((s, i) => (
-            <Reveal
-              key={s.title}
-              delay={i * 100}
-            >
-              <div
-                className={cn(
-                  "group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card",
-                  "transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1"
-                )}
-              >
-                {/* Image */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={s.image}
-                    alt={s.title}
-                    fill
-                    loading="lazy"
-                    placeholder="blur"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
-                  <span className="absolute bottom-4 left-4 font-mono text-xs text-primary/80">
-                    0{i + 1}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-heading text-xl font-semibold text-foreground">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {s.desc}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
         

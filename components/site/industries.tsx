@@ -1,74 +1,91 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Building2, HeartPulse, ShoppingBag, Truck } from "lucide-react";
-import { useEffect, useState } from "react";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Building2, Factory, HeartPulse, Landmark, ShoppingBag, Truck } from "lucide-react";
+import { Reveal } from "./reveal";
 
 const industries = [
   {
     icon: Building2,
-    name: "Real Estate & Construction",
-    line: "Property management and construction technology solutions for modern developments.",
+    name: "Real Estate",
+    desc: "Property management and construction technology solutions.",
   },
   {
     icon: HeartPulse,
     name: "Healthcare",
-    line: "Digital health platforms and patient care systems for critical environments.",
+    desc: "Digital health platforms and patient care systems.",
   },
   {
     icon: ShoppingBag,
-    name: "Retail & E-commerce",
-    line: "Omnichannel retail solutions and e-commerce platforms that convert.",
+    name: "Retail",
+    desc: "Omnichannel retail and e-commerce platforms.",
   },
   {
     icon: Truck,
-    name: "Logistics & Supply Chain",
-    line: "Supply chain optimization and fleet management for operational excellence.",
+    name: "Logistics",
+    desc: "Supply chain optimization and fleet management.",
+  },
+  {
+    icon: Factory,
+    name: "Manufacturing",
+    desc: "Industrial IoT and production automation.",
+  },
+  {
+    icon: Landmark,
+    name: "Finance",
+    desc: "Secure fintech and regulatory compliance systems.",
   },
 ];
 
-export function Industries() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setActive((a) => (a + 1) % industries.length), 4000);
-    return () => clearInterval(id);
-  }, []);
-
-  const current = industries[active];
-  const Icon = current.icon;
-
+function IndustryCard({ industry, index }: { industry: typeof industries[0]; index: number }) {
+  const Icon = industry.icon;
+  
   return (
-    <section className="border-y border-border bg-card/40">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-8 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-        <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground">
-          INDUSTRIES SERVED
-        </span>
-
-        <div className="flex min-h-12 items-center gap-4">
-          <span className="grid size-11 shrink-0 place-items-center rounded-md border border-primary/40 bg-primary/10 text-primary">
+    <Reveal delay={index * 60}>
+      <div className="relative h-full rounded-xl border border-border p-1.5">
+        <GlowingEffect
+          spread={30}
+          glow={true}
+          disabled={false}
+          proximity={50}
+          inactiveZone={0.01}
+        />
+        <div className="relative flex h-full flex-col items-center gap-3 rounded-lg bg-card p-5 text-center transition-colors hover:bg-card/80">
+          <div className="flex size-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
             <Icon className="size-5" />
-          </span>
+          </div>
           <div>
-            <p className="font-heading text-lg font-semibold text-foreground">{current.name}</p>
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{current.line}</p>
+            <h3 className="font-heading text-sm font-semibold text-foreground">
+              {industry.name}
+            </h3>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              {industry.desc}
+            </p>
           </div>
         </div>
+      </div>
+    </Reveal>
+  );
+}
 
-        <div className="flex items-center gap-2" role="tablist" aria-label="Industries">
-          {industries.map((ind, i) => (
-            <button
-              key={ind.name}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              aria-label={ind.name}
-              onClick={() => setActive(i)}
-              className={cn(
-                "h-1.5 rounded-full transition-all",
-                i === active ? "w-8 bg-primary" : "w-3 bg-border hover:bg-muted-foreground/50",
-              )}
-            />
+export function Industries() {
+  return (
+    <section className="border-b border-border bg-card/30">
+      <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
+        <div className="flex flex-col items-center text-center">
+          <Reveal>
+            <span className="font-mono text-xs tracking-[0.3em] text-primary">
+              INDUSTRIES WE SERVE
+            </span>
+            <h2 className="mt-3 text-balance font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Expertise across sectors
+            </h2>
+          </Reveal>
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {industries.map((industry, i) => (
+            <IndustryCard key={industry.name} industry={industry} index={i} />
           ))}
         </div>
       </div>

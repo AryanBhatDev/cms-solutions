@@ -1,3 +1,6 @@
+"use client";
+
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { BadgeCheck, Globe2, Handshake, Target } from "lucide-react";
 import { Reveal } from "./reveal";
 
@@ -35,22 +38,29 @@ export function WhyUs() {
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {principles.map((p, i) => {
             const Icon = p.icon;
             return (
-              <Reveal
-                key={p.title}
-                delay={i * 80}
-                className="flex flex-col bg-background p-7 transition-colors hover:bg-card"
-              >
-                <span className="grid size-11 place-items-center rounded-md border border-primary/30 bg-primary/10 text-primary">
-                  <Icon className="size-5" />
-                </span>
-                <h3 className="mt-5 font-heading text-base font-semibold text-foreground">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="relative h-full rounded-2xl border border-border p-2">
+                  <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
+                  <div className="relative flex h-full flex-col rounded-xl bg-card p-6">
+                    <span className="grid size-11 place-items-center rounded-md border border-primary/30 bg-primary/10 text-primary">
+                      <Icon className="size-5" />
+                    </span>
+                    <h3 className="mt-5 font-heading text-base font-semibold text-foreground">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                  </div>
+                </div>
               </Reveal>
             );
           })}
