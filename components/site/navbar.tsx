@@ -49,15 +49,11 @@ export function Navbar() {
         <ScrollLink
           href="#home"
           onClick={(e) => handleNav(e, "#home")}
-          className="flex items-center gap-2.5"
+          className="flex items-center gap-2"
           aria-label="CMR Solutions home"
         >
-          <span className="grid size-8 place-items-center rounded-md border border-primary/40 bg-primary/10">
-            <span className="block size-3 rounded-[2px] bg-primary" />
-          </span>
-
-          <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
-            CMR <span className="font-normal text-muted-foreground">Solutions</span>
+          <span className="font-heading text-lg font-bold tracking-tight text-foreground">
+            CMR <span className="text-primary">Solutions</span>
           </span>
         </ScrollLink>
 

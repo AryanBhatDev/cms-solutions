@@ -1,3 +1,7 @@
+"use client";
+
+import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
+import { motion } from "framer-motion";
 import { Reveal } from "./reveal";
 
 const stats = [
@@ -9,44 +13,23 @@ const stats = [
 
 export function Mission() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-card/40 bg-blueprint-sm">
-      {/* rotating decorative schematic */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/2 hidden -translate-y-1/2 opacity-[0.12] lg:block"
-      >
-        <svg
-          width="420"
-          height="420"
-          viewBox="0 0 200 200"
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth="0.6"
-          style={{ animation: "cmr-spin 60s linear infinite" }}
-        >
-          <circle cx="100" cy="100" r="90" />
-          <circle cx="100" cy="100" r="62" />
-          <circle cx="100" cy="100" r="34" />
-          <path d="M10 100h180M100 10v180" />
-          <path d="M30 30l140 140M170 30L30 170" />
-          {Array.from({ length: 12 }).map((_, i) => {
-            const a = (i / 12) * Math.PI * 2;
-            return (
-              <circle
-                key={i}
-                cx={100 + Math.cos(a) * 90}
-                cy={100 + Math.sin(a) * 90}
-                r="3"
-                fill="var(--primary)"
-                stroke="none"
-              />
-            );
-          })}
-        </svg>
-        <style>{`@keyframes cmr-spin { to { transform: rotate(360deg); } }`}</style>
-      </div>
+    <section className="relative overflow-hidden border-b border-border bg-card/40">
+      {/* Dotted Glow Background */}
+      <DottedGlowBackground
+        className="pointer-events-none"
+        gap={20}
+        radius={1.5}
+        color="rgba(100, 100, 120, 0.4)"
+        darkColor="rgba(180, 180, 200, 0.3)"
+        glowColor="var(--primary)"
+        darkGlowColor="var(--primary)"
+        opacity={0.5}
+        speedMin={0.3}
+        speedMax={0.8}
+        speedScale={0.8}
+      />
 
-      <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal>
             <span className="font-mono text-xs tracking-[0.3em] text-primary">
@@ -68,9 +51,15 @@ export function Mission() {
                 delay={i * 80}
                 className="flex flex-col justify-between bg-background p-6 even:bg-card"
               >
-                <span className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+                <motion.span 
+                  className="font-heading text-2xl font-bold text-primary sm:text-3xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
                   {s.value}
-                </span>
+                </motion.span>
                 <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {s.label}
                 </span>

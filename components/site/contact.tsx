@@ -1,7 +1,17 @@
 "use client";
 
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import dynamic from "next/dynamic";
 import { Reveal } from "./reveal";
+
+const OfficeMap = dynamic(() => import("./office-map"), {
+  ssr: false,
+  loading: () => (
+    <div className="grid h-full min-h-72 w-full place-items-center bg-muted">
+      <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground">LOADING MAP…</span>
+    </div>
+  ),
+});
 
 export function Contact() {
   return (
@@ -71,22 +81,9 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative h-full min-h-72 overflow-hidden rounded-xl border border-border bg-muted">
-              <div className="absolute inset-0 bg-blueprint" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="mx-auto grid size-16 place-items-center rounded-xl border border-primary/30 bg-primary/10">
-                    <MapPin className="size-8 text-primary" />
-                  </div>
-                  <p className="mt-4 font-heading text-lg font-semibold text-foreground">
-                    Perth, Western Australia
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Serving clients across Australia
-                  </p>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full border border-border bg-card/85 px-3 py-1 font-mono text-xs tracking-wider text-muted-foreground backdrop-blur">
+            <div className="relative h-full min-h-72 overflow-hidden rounded-xl border border-border">
+              <OfficeMap />
+              <div className="pointer-events-none absolute left-4 top-4 z-[400] inline-flex items-center gap-2 rounded-full border border-border bg-card/85 px-3 py-1 font-mono text-xs tracking-wider text-muted-foreground backdrop-blur">
                 <span className="size-1.5 rounded-full bg-primary" />
                 Perth, WA
               </div>

@@ -1,3 +1,7 @@
+"use client";
+
+import { Boxes } from "@/components/ui/background-boxes";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Reveal } from "./reveal";
 
@@ -34,8 +38,16 @@ const shots = [
 
 export function Showcase() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-blueprint-sm">
-      <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+    <section className="relative min-h-[600px] overflow-hidden border-b border-border bg-background">
+      {/* Background Boxes - Interactive 3D Grid */}
+      <div className={cn(
+        "absolute inset-0 z-0 h-full w-full overflow-hidden",
+        "[mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+      )}>
+        <Boxes />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
         <div className="max-w-3xl">
           <Reveal>
             <span className="font-mono text-xs tracking-[0.3em] text-primary">
@@ -55,7 +67,7 @@ export function Showcase() {
             <Reveal
               key={shot.src}
               delay={(i % 4) * 90}
-              className={`group relative overflow-hidden rounded-lg border border-border ${shot.span}`}
+              className={`group relative overflow-hidden rounded-lg border border-border bg-card ${shot.span}`}
             >
               <Image
                 src={shot.src}

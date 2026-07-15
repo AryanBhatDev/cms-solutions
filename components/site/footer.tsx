@@ -13,14 +13,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid size-8 place-items-center rounded-md border border-primary/40 bg-primary/10">
-                <span className="block size-3 rounded-[2px] bg-primary" />
-              </span>
-              <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
-                CMR Solutions PTY. LTD.
-              </span>
-            </div>
+            <span className="font-heading text-lg font-bold tracking-tight text-foreground">
+              CMR <span className="text-primary">Solutions</span>
+            </span>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Australian technology &amp; ICT consulting — partners in innovation, delivering
               outcomes that matter since 2014.
