@@ -2,19 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import Image, { StaticImageData } from "next/image";
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { Boxes } from "@/components/ui/background-boxes";
 import { Reveal } from "./reveal";
 
 import showcase1 from "@/public/images/showcase-1.webp";
 import showcase2 from "@/public/images/showcase-2.webp";
 import showcase3 from "@/public/images/showcase-3.webp";
 import showcase4 from "@/public/images/showcase-4.webp";
-
-const Boxes = dynamic(
-  () => import("@/components/ui/background-boxes").then((mod) => mod.Boxes),
-  { ssr: false }
-);
 
 const shots: {
   src: StaticImageData;
@@ -53,47 +47,17 @@ const shots: {
   },
 ];
 
-function LazyBoxes() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoad(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "100px" }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "absolute inset-0 z-0 h-full w-full overflow-hidden",
-        "[mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
-      )}
-    >
-      {shouldLoad && <Boxes />}
-    </div>
-  );
-}
-
 export function Showcase() {
   return (
-    <section className="relative min-h-[600px] overflow-hidden border-b border-border bg-background">
-      <LazyBoxes />
+    <section className="relative h-[800px] w-full overflow-hidden border-b border-border bg-background">
+      {/* Background Boxes - Full coverage */}
+      <div className="absolute inset-0 z-0 h-full w-full overflow-hidden bg-background">
+        <Boxes />
+        {/* Radial gradient for fading effect */}
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+      </div>
 
-      {/* Content */}
+      {/* Content - pointer-events-none so background is interactive */}
       <div className="pointer-events-none relative z-10 mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
         <div className="max-w-3xl">
           <Reveal>
@@ -114,7 +78,10 @@ export function Showcase() {
             <Reveal
               key={shot.label}
               delay={(i % 4) * 90}
-              className={`pointer-events-auto group relative overflow-hidden rounded-lg border border-border bg-card ${shot.span}`}
+              className={cn(
+                "pointer-events-auto group relative overflow-hidden rounded-lg border border-border bg-card",
+                shot.span
+              )}
             >
               <Image
                 src={shot.src}

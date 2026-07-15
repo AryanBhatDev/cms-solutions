@@ -1,20 +1,21 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
-  const rows = useMemo(() => new Array(40).fill(1), []);
-  const cols = useMemo(() => new Array(30).fill(1), []);
-  
+  const rows = new Array(150).fill(1);
+  const cols = new Array(100).fill(1);
   const colors = [
-    "rgba(59, 130, 246, 0.3)",
-    "rgba(147, 51, 234, 0.3)",
-    "rgba(34, 197, 94, 0.3)",
-    "rgba(251, 146, 60, 0.3)",
-    "rgba(236, 72, 153, 0.3)",
+    "rgba(59, 130, 246, 0.7)",
+    "rgba(147, 51, 234, 0.7)",
+    "rgba(34, 197, 94, 0.7)",
+    "rgba(251, 146, 60, 0.7)",
+    "rgba(236, 72, 153, 0.7)",
+    "rgba(99, 102, 241, 0.7)",
+    "rgba(20, 184, 166, 0.7)",
+    "rgba(245, 158, 11, 0.7)",
   ];
-  
   const getRandomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
   };
@@ -31,27 +32,30 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
       {...rest}
     >
       {rows.map((_, i) => (
-        <div
+        <motion.div
           key={`row` + i}
-          className="relative h-8 w-16 border-l border-primary/20"
+          className="relative h-8 w-16 border-l border-primary/40"
         >
           {cols.map((_, j) => (
             <motion.div
               whileHover={{
-                backgroundColor: getRandomColor(),
+                backgroundColor: `${getRandomColor()}`,
                 transition: { duration: 0 },
               }}
+              animate={{
+                transition: { duration: 2 },
+              }}
               key={`col` + j}
-              className="relative h-8 w-16 border-t border-r border-primary/20"
+              className="relative h-8 w-16 border-t border-r border-primary/40"
             >
-              {j % 4 === 0 && i % 4 === 0 ? (
+              {j % 2 === 0 && i % 2 === 0 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="pointer-events-none absolute -top-[14px] -left-[22px] h-6 w-10 stroke-[1px] text-primary/30"
+                  className="pointer-events-none absolute -top-[14px] -left-[22px] h-6 w-10 stroke-[1px] text-primary/50"
                 >
                   <path
                     strokeLinecap="round"
@@ -62,7 +66,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
               ) : null}
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       ))}
     </div>
   );

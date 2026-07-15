@@ -2,7 +2,6 @@
 
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./reveal";
 
 const OfficeMap = dynamic(() => import("./office-map"), {
@@ -13,41 +12,6 @@ const OfficeMap = dynamic(() => import("./office-map"), {
     </div>
   ),
 });
-
-function LazyMap() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoad(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="h-full min-h-72 w-full">
-      {shouldLoad ? (
-        <OfficeMap />
-      ) : (
-        <div className="grid h-full min-h-72 w-full place-items-center bg-muted">
-          <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground">MAP</span>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function Contact() {
   return (
@@ -118,7 +82,7 @@ export function Contact() {
 
           <Reveal delay={120}>
             <div className="relative h-full min-h-72 overflow-hidden rounded-xl border border-border">
-              <LazyMap />
+              <OfficeMap />
               <div className="pointer-events-none absolute left-4 top-4 z-[400] inline-flex items-center gap-2 rounded-full border border-border bg-card/85 px-3 py-1 font-mono text-xs tracking-wider text-muted-foreground backdrop-blur">
                 <span className="size-1.5 rounded-full bg-primary" />
                 Perth, WA
