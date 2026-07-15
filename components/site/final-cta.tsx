@@ -3,19 +3,20 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Reveal } from "./reveal";
 import { ScrollLink } from "./scroll-link";
+import ctaImage from "@/public/images/cta.webp";
 
 export function FinalCta() {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="absolute inset-0 -z-10">
         <Image
-          src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1800&q=70"
+          src={ctaImage}
           alt=""
           fill
           loading="lazy"
+          placeholder="blur"
           sizes="100vw"
           className="object-cover opacity-30"
-          quality={70}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
       </div>

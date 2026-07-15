@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "./reveal";
+import aboutImage from "@/public/images/about.webp";
 
 export function About() {
   return (
@@ -32,13 +33,13 @@ export function About() {
           <Reveal delay={120} className="order-1 lg:order-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                src={aboutImage}
                 alt="CMR Solutions team collaborating"
                 fill
                 loading="lazy"
+                placeholder="blur"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
-                quality={80}
               />
               <div className="absolute inset-0 ring-1 ring-inset ring-white/5" />
             </div>

@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
-  const rows = new Array(150).fill(1);
-  const cols = new Array(100).fill(1);
+  const rows = useMemo(() => new Array(40).fill(1), []);
+  const cols = useMemo(() => new Array(30).fill(1), []);
   
   const colors = [
     "rgba(59, 130, 246, 0.3)",
@@ -31,7 +31,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
       {...rest}
     >
       {rows.map((_, i) => (
-        <motion.div
+        <div
           key={`row` + i}
           className="relative h-8 w-16 border-l border-primary/20"
         >
@@ -41,13 +41,10 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                 backgroundColor: getRandomColor(),
                 transition: { duration: 0 },
               }}
-              animate={{
-                transition: { duration: 2 },
-              }}
               key={`col` + j}
               className="relative h-8 w-16 border-t border-r border-primary/20"
             >
-              {j % 2 === 0 && i % 2 === 0 ? (
+              {j % 4 === 0 && i % 4 === 0 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -65,7 +62,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
               ) : null}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       ))}
     </div>
   );

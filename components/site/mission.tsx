@@ -1,8 +1,13 @@
 "use client";
 
-import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./reveal";
+
+const DottedGlowBackground = dynamic(
+  () => import("@/components/ui/dotted-glow-background").then((mod) => mod.DottedGlowBackground),
+  { ssr: false }
+);
 
 const stats = [
   { value: "2014", label: "Year founded" },
@@ -11,23 +16,53 @@ const stats = [
   { value: "Perth, WA", label: "Head office location" },
 ];
 
+function LazyBackground() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="absolute inset-0">
+      {shouldLoad && (
+        <DottedGlowBackground
+          className="pointer-events-none"
+          gap={24}
+          radius={1}
+          color="rgba(100, 100, 120, 0.3)"
+          darkColor="rgba(180, 180, 200, 0.2)"
+          glowColor="var(--primary)"
+          darkGlowColor="var(--primary)"
+          opacity={0.4}
+          speedMin={0.2}
+          speedMax={0.5}
+          speedScale={0.5}
+        />
+      )}
+    </div>
+  );
+}
+
 export function Mission() {
   return (
     <section className="relative overflow-hidden border-b border-border bg-card/40">
-      {/* Dotted Glow Background */}
-      <DottedGlowBackground
-        className="pointer-events-none"
-        gap={20}
-        radius={1.5}
-        color="rgba(100, 100, 120, 0.4)"
-        darkColor="rgba(180, 180, 200, 0.3)"
-        glowColor="var(--primary)"
-        darkGlowColor="var(--primary)"
-        opacity={0.5}
-        speedMin={0.3}
-        speedMax={0.8}
-        speedScale={0.8}
-      />
+      <LazyBackground />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-2">
@@ -51,15 +86,9 @@ export function Mission() {
                 delay={i * 80}
                 className="flex flex-col justify-between bg-background p-6 even:bg-card"
               >
-                <motion.span 
-                  className="font-heading text-2xl font-bold text-primary sm:text-3xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
+                <span className="font-heading text-2xl font-bold text-primary sm:text-3xl">
                   {s.value}
-                </motion.span>
+                </span>
                 <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {s.label}
                 </span>
