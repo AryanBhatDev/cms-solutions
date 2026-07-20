@@ -73,6 +73,8 @@ export function Navbar() {
                 mounted && resolvedTheme === "light" ? "opacity-100" : "opacity-0"
               )}
               priority
+              fetchPriority="high"
+              placeholder="blur"
             />
             <Image
               src={logoDark}
@@ -84,6 +86,8 @@ export function Navbar() {
                 !mounted || resolvedTheme === "dark" ? "opacity-100" : "opacity-0"
               )}
               priority
+              fetchPriority="high"
+              placeholder="blur"
             />
           </div>
         </ScrollLink>

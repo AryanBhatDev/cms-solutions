@@ -52,6 +52,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} bg-background`}
     >
+      <head>
+        <link rel="preload" href="/images/dark-mode-logo.png" as="image" fetchPriority="high" />
+      </head>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           {children}
