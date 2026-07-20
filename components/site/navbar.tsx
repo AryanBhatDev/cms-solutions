@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/scroll";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ScrollLink } from "./scroll-link";
 import { ThemeToggle } from "./theme-toggle";
+import logo from "@/public/images/logo.png";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -52,9 +54,14 @@ export function Navbar() {
           className="flex items-center gap-2"
           aria-label="CMR Solutions home"
         >
-          <span className="font-heading text-lg font-bold tracking-tight text-foreground">
-            CMR <span className="text-primary">Solutions</span>
-          </span>
+          <Image
+            src={logo}
+            alt="CMR Solutions"
+            height={48}
+            width={180}
+            className="h-12 w-auto"
+            priority
+          />
         </ScrollLink>
 
         <ul className="hidden items-center gap-8 md:flex">

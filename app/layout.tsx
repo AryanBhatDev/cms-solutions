@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   title: "CMR Solutions — Technology & ICT Consulting | Perth, WA",
   description:
     "CMR Solutions is an Australian technology and ICT consulting firm in Perth, WA. Delivering Managed Services, Strategy Consulting, Professional Services, and Design & Marketing.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -50,7 +53,7 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} bg-background`}
     >
       <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
