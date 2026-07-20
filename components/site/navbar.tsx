@@ -6,9 +6,11 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { ScrollLink } from "./scroll-link";
 import { ThemeToggle } from "./theme-toggle";
-import logo from "@/public/images/logo.png";
+import logoLight from "@/public/images/logo.png";
+import logoDark from "@/public/images/dark-mode-logo.png";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -20,6 +22,12 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -54,14 +62,30 @@ export function Navbar() {
           className="flex items-center gap-2"
           aria-label="CMR Solutions home"
         >
-          <Image
-            src={logo}
-            alt="CMR Solutions"
-            height={48}
-            width={180}
-            className="h-12 w-auto"
-            priority
-          />
+          <div className="relative h-12 w-[240px]">
+            <Image
+              src={logoLight}
+              alt="CMR Solutions"
+              fill
+              sizes="240px"
+              className={cn(
+                "object-contain object-left",
+                mounted && resolvedTheme === "light" ? "opacity-100" : "opacity-0"
+              )}
+              priority
+            />
+            <Image
+              src={logoDark}
+              alt="CMR Solutions"
+              fill
+              sizes="240px"
+              className={cn(
+                "object-contain object-left",
+                !mounted || resolvedTheme === "dark" ? "opacity-100" : "opacity-0"
+              )}
+              priority
+            />
+          </div>
         </ScrollLink>
 
         <ul className="hidden items-center gap-8 md:flex">
