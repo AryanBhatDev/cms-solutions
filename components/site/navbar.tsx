@@ -74,7 +74,6 @@ export function Navbar() {
               )}
               priority
               fetchPriority="high"
-              placeholder="blur"
             />
             <Image
               src={logoDark}
@@ -87,7 +86,6 @@ export function Navbar() {
               )}
               priority
               fetchPriority="high"
-              placeholder="blur"
             />
           </div>
         </ScrollLink>
