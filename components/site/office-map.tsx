@@ -4,7 +4,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const position: [number, number] = [-31.9505, 115.8605];
+// West Perth coordinates
+const position: [number, number] = [-31.9465, 115.8435];
 
 const customIcon = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -20,7 +21,7 @@ export default function OfficeMap() {
   return (
     <MapContainer
       center={position}
-      zoom={14}
+      zoom={15}
       scrollWheelZoom={false}
       className="h-full w-full"
       style={{ minHeight: "300px" }}
@@ -34,9 +35,9 @@ export default function OfficeMap() {
           <div className="text-sm">
             <strong>CMR Solutions</strong>
             <br />
-            1 Brewer Street
+            45 Ventnor Avenue
             <br />
-            Perth, WA 6000
+            West Perth, WA 6005
           </div>
         </Popup>
       </Marker>

@@ -42,9 +42,9 @@ export function Footer() {
             <h3 className="font-mono text-xs tracking-[0.3em] text-muted-foreground">CONTACT</h3>
             <address className="mt-4 space-y-3 text-sm not-italic leading-relaxed text-muted-foreground">
               <p>
-                1 Brewer Street,
+                45 Ventnor Avenue,
                 <br />
-                Perth, WA 6000
+                West Perth, WA 6005
               </p>
               <a
                 href="mailto:info@cmrsolutions.com.au"

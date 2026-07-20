@@ -55,8 +55,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <Reveal>
             <h1 className="mt-6 text-balance font-heading text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              CMR Solutions{" "}
-              <span className="text-muted-foreground">PTY. LTD.</span>
+              CMR Solutions
             </h1>
             {/* Sparkles under title - theme aware colors */}
             <div className="relative h-8 w-full max-w-lg">

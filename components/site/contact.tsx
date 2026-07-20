@@ -35,46 +35,32 @@ export function Contact() {
                 </span>
                 <p className="font-heading text-sm font-semibold text-foreground">Head Office</p>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  1 Brewer Street,
+                  45 Ventnor Avenue,
                   <br />
-                  Perth, WA 6000
+                  West Perth, WA 6005
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 bg-card p-7">
-                <span className="grid size-11 place-items-center rounded-md border border-primary/30 bg-primary/10 text-primary">
-                  <Mail className="size-5" />
-                </span>
-                <p className="font-heading text-sm font-semibold text-foreground">Email</p>
-                <a
-                  href="mailto:info@cmrsolutions.com.au"
-                  className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
-                >
-                  info@cmrsolutions.com.au
-                  <ArrowUpRight className="size-3.5" />
-                </a>
-              </div>
-
-              <div className="flex flex-col gap-3 bg-card p-7">
+              <div className="flex flex-col gap-4 bg-card p-7">
                 <span className="grid size-11 place-items-center rounded-md border border-primary/30 bg-primary/10 text-primary">
                   <Phone className="size-5" />
                 </span>
-                <p className="font-heading text-sm font-semibold text-foreground">Phone</p>
-                <a
-                  href="tel:+61861022880"
-                  className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
-                >
-                  +61 (08) 6102 2880
-                  <ArrowUpRight className="size-3.5" />
-                </a>
-              </div>
-
-              <div className="flex flex-col gap-3 bg-background p-7">
-                <p className="font-heading text-sm font-semibold text-foreground">Business Hours</p>
-                <div className="text-sm leading-relaxed text-muted-foreground">
-                  <p>Monday – Friday: 8AM – 6PM</p>
-                  <p>Saturday: 9AM – 1PM</p>
-                  <p>Sunday: Closed</p>
+                <p className="font-heading text-sm font-semibold text-foreground">Contact Us</p>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="mailto:info@cmrsolutions.com.au"
+                    className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    <Mail className="size-3.5" />
+                    info@cmrsolutions.com.au
+                  </a>
+                  <a
+                    href="tel:+61861022880"
+                    className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    <Phone className="size-3.5" />
+                    +61 (08) 6102 2880
+                  </a>
                 </div>
               </div>
             </div>
@@ -85,7 +71,7 @@ export function Contact() {
               <OfficeMap />
               <div className="pointer-events-none absolute left-4 top-4 z-[400] inline-flex items-center gap-2 rounded-full border border-border bg-card/85 px-3 py-1 font-mono text-xs tracking-wider text-muted-foreground backdrop-blur">
                 <span className="size-1.5 rounded-full bg-primary" />
-                Perth, WA
+                West Perth, WA
               </div>
             </div>
           </Reveal>
