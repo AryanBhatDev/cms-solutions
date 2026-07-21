@@ -5,42 +5,84 @@ import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Cloud, Lightbulb, Palette, Wrench } from "lucide-react";
+import { 
+  ArrowRight, 
+  Bot, 
+  Cloud, 
+  Code2, 
+  Lightbulb, 
+  Server, 
+  Palette, 
+  Wrench,
+  Database
+} from "lucide-react";
 import { useState } from "react";
 import { Reveal } from "./reveal";
 import { ScrollLink } from "./scroll-link";
 
 const services = [
   {
-    icon: Cloud,
-    title: "Managed Services",
-    shortDesc: "24/7 IT infrastructure management",
-    fullDesc: "We handle your entire infrastructure — servers, networks, security, and support — so you can focus on growing your business.",
+    icon: Code2,
+    title: "Software Development",
+    shortDesc: "Custom software solutions",
+    fullDesc: "We blend innovation, expertise, and passion to create custom software, web and mobile applications that redefine the future.",
     colors: [[59, 130, 246], [99, 102, 241]],
     bgColor: "bg-blue-900",
   },
   {
     icon: Lightbulb,
-    title: "Strategy Consulting",
-    shortDesc: "Digital transformation roadmaps",
-    fullDesc: "Technology guidance that drives innovation. We create actionable roadmaps aligning tech investments with business outcomes.",
+    title: "Consultancy",
+    shortDesc: "Strategic technology guidance",
+    fullDesc: "Comprehensive consulting services designed to elevate your business through strategic innovation and cutting-edge technology.",
     colors: [[251, 146, 60], [245, 158, 11]],
     bgColor: "bg-orange-900",
+  },
+  {
+    icon: Cloud,
+    title: "Application Managed Services",
+    shortDesc: "Proactive app management",
+    fullDesc: "Our dedicated team manages and supports your applications with 24/7 support, performance optimisation, and security compliance.",
+    colors: [[34, 197, 94], [16, 185, 129]],
+    bgColor: "bg-emerald-900",
+  },
+  {
+    icon: Bot,
+    title: "Automation & AI",
+    shortDesc: "Intelligent automation",
+    fullDesc: "Transform your operations with workflow automation, AI-driven insights, dynamic forms, and robotic process automation.",
+    colors: [[147, 51, 234], [236, 72, 153]],
+    bgColor: "bg-purple-900",
+  },
+  {
+    icon: Server,
+    title: "Managed Services",
+    shortDesc: "24/7 IT infrastructure",
+    fullDesc: "We handle your entire infrastructure — servers, networks, security, and support — so you can focus on growing your business.",
+    colors: [[20, 184, 166], [6, 182, 212]],
+    bgColor: "bg-teal-900",
   },
   {
     icon: Wrench,
     title: "Professional Services",
     shortDesc: "Implementation & integration",
-    fullDesc: "Connect your systems, automate workflows, and support your people. We deliver projects on time with minimal disruption.",
-    colors: [[34, 197, 94], [16, 185, 129]],
-    bgColor: "bg-emerald-900",
+    fullDesc: "We empower organisations to unify systems, streamline workflows, and enhance operational efficiency through seamless integration.",
+    colors: [[239, 68, 68], [244, 63, 94]],
+    bgColor: "bg-red-900",
+  },
+  {
+    icon: Database,
+    title: "Data Migration",
+    shortDesc: "Secure data transitions",
+    fullDesc: "Our expertise ensures smooth, secure migration processes — SharePoint, SQL Server, Exchange, Dynamics 365, and Power Platform.",
+    colors: [[168, 85, 247], [192, 132, 252]],
+    bgColor: "bg-violet-900",
   },
   {
     icon: Palette,
     title: "Design & Marketing",
     shortDesc: "Brand & digital presence",
     fullDesc: "Digital-first design and marketing that amplifies your brand and converts your audience into loyal customers.",
-    colors: [[236, 72, 153], [147, 51, 234]],
+    colors: [[236, 72, 153], [249, 115, 22]],
     bgColor: "bg-pink-900",
   },
 ];
@@ -135,18 +177,18 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
         <div className="max-w-3xl">
           <Reveal>
-            <span className="font-mono text-xs tracking-[0.3em] text-primary">01 — SERVICES</span>
+            <span className="font-mono text-xs tracking-[0.3em] text-primary">01 — WHAT WE DO</span>
             <h2 className="mt-4 text-balance font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Four pillars. One partner. End-to-end technology services.
+              Empowering you with tailored digital solutions and expert services
             </h2>
             <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">
-              From day-to-day IT operations to long-term digital strategy, CMR Solutions provides
-              end-to-end services that keep your business efficient, innovative, and competitive.
+              From custom software development to intelligent automation, CMR Solutions delivers
+              end-to-end technology services that transform your business and drive growth.
             </p>
           </Reveal>
         </div>
         
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
           ))}

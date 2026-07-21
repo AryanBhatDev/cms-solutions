@@ -24,8 +24,8 @@ export function About() {
                 we&apos;ve been committed to driving business value across all industry verticals.
               </p>
               <p>
-                We offer a range of services — managed services, strategy consulting, professional
-                services, and design & marketing — enabled by experience, proven methodologies, and
+                We offer a range of services — software development, consultancy, application managed
+                services, and automation & AI — enabled by experience, proven methodologies, and
                 innovation.
               </p>
             </div>

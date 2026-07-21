@@ -1,55 +1,80 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { Boxes } from "@/components/ui/background-boxes";
 import { Reveal } from "./reveal";
 
-import showcase1 from "@/public/images/showcase-1.webp";
-import showcase2 from "@/public/images/showcase-2.webp";
-import showcase3 from "@/public/images/showcase-3.webp";
-import showcase4 from "@/public/images/showcase-4.webp";
-
-const shots: {
-  src: StaticImageData;
-  alt: string;
-  label: string;
-  span: string;
-  sizes: string;
-}[] = [
+const shots = [
   {
-    src: showcase1,
-    alt: "Modern office workspace with technology infrastructure",
-    label: "Enterprise solutions",
-    span: "sm:col-span-2 sm:row-span-2",
-    sizes: "(max-width: 640px) 100vw, 50vw",
+    src: "/images/service-software.webp",
+    alt: "Custom software development",
+    label: "Software Development",
   },
   {
-    src: showcase2,
-    alt: "Team collaborating on digital strategy",
-    label: "Strategic consulting",
-    span: "",
-    sizes: "(max-width: 640px) 50vw, 25vw",
+    src: "/images/service-consultancy.webp",
+    alt: "Strategic consulting session",
+    label: "Consultancy",
   },
   {
-    src: showcase3,
-    alt: "Data analytics dashboard on screen",
-    label: "Data-driven insights",
-    span: "",
-    sizes: "(max-width: 640px) 50vw, 25vw",
+    src: "/images/service-managed.webp",
+    alt: "Application management dashboard",
+    label: "App Managed Services",
   },
   {
-    src: showcase4,
-    alt: "Technical team working on system integration",
-    label: "System integration",
-    span: "sm:col-span-2",
-    sizes: "(max-width: 640px) 100vw, 50vw",
+    src: "/images/service-automation.webp",
+    alt: "AI and automation",
+    label: "Automation & AI",
+  },
+  {
+    src: "/images/service-infrastructure.webp",
+    alt: "IT infrastructure",
+    label: "Managed Services",
+  },
+  {
+    src: "/images/service-integration.webp",
+    alt: "System integration",
+    label: "Professional Services",
+  },
+  {
+    src: "/images/service-migration.webp",
+    alt: "Data migration",
+    label: "Data Migration",
+  },
+  {
+    src: "/images/service-design.webp",
+    alt: "Design and marketing",
+    label: "Design & Marketing",
   },
 ];
 
+function GridItem({ shot, delay, className }: { shot: typeof shots[0]; delay: number; className?: string }) {
+  return (
+    <Reveal
+      delay={delay}
+      className={`pointer-events-auto group relative overflow-hidden rounded-xl border border-border bg-card ${className || ""}`}
+    >
+      <Image
+        src={shot.src}
+        alt={shot.alt}
+        fill
+        loading="lazy"
+        sizes="(max-width: 768px) 50vw, 25vw"
+        className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-4">
+        <span className="size-1.5 rounded-full bg-primary" />
+        <span className="font-mono text-xs tracking-wider text-foreground">
+          {shot.label}
+        </span>
+      </div>
+    </Reveal>
+  );
+}
+
 export function Showcase() {
   return (
-    <section className="relative h-[800px] w-full overflow-hidden border-b border-border bg-background">
+    <section className="relative w-full overflow-hidden border-b border-border bg-background">
       {/* Background Boxes - Full coverage */}
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden bg-background">
         <Boxes />
@@ -68,39 +93,38 @@ export function Showcase() {
               Technology solutions built for real-world impact
             </h2>
             <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">
-              From enterprise infrastructure to digital transformation, our work is built for the
-              demands of modern business environments.
+              From enterprise software to intelligent automation, our work spans the full spectrum
+              of modern business technology needs.
             </p>
           </Reveal>
         </div>
-        <div className="mt-12 grid auto-rows-[180px] grid-cols-2 gap-3 sm:auto-rows-[200px] sm:grid-cols-4 lg:gap-4">
+        
+        {/* Mobile Grid - 2 columns */}
+        <div className="mt-12 grid grid-cols-2 gap-3 md:hidden">
           {shots.map((shot, i) => (
-            <Reveal
-              key={shot.label}
-              delay={(i % 4) * 90}
-              className={cn(
-                "pointer-events-auto group relative overflow-hidden rounded-lg border border-border bg-card",
-                shot.span
-              )}
-            >
-              <Image
-                src={shot.src}
-                alt={shot.alt}
-                fill
-                loading="lazy"
-                placeholder="blur"
-                sizes={shot.sizes}
-                className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-4">
-                <span className="size-1.5 rounded-full bg-primary" />
-                <span className="font-mono text-xs tracking-wider text-foreground">
-                  {shot.label}
-                </span>
-              </div>
-            </Reveal>
+            <GridItem key={shot.label} shot={shot} delay={i * 50} className="h-[160px]" />
           ))}
+        </div>
+
+        {/* Desktop Bento Grid Layout - exact layout from image */}
+        <div className="mt-12 hidden gap-4 md:grid md:grid-cols-4 md:grid-rows-[180px_180px_140px]">
+          {/* Row 1: 4 equal boxes */}
+          <GridItem shot={shots[0]} delay={0} />
+          <GridItem shot={shots[1]} delay={60} />
+          <GridItem shot={shots[2]} delay={120} />
+          <GridItem shot={shots[3]} delay={180} />
+          
+          {/* Row 2-3 Left: Tall box spanning 2 rows */}
+          <GridItem shot={shots[4]} delay={240} className="row-span-2" />
+          
+          {/* Row 2 Middle: Wide box spanning 2 cols */}
+          <GridItem shot={shots[5]} delay={300} className="col-span-2" />
+          
+          {/* Row 2-3 Right: Tall box spanning 2 rows */}
+          <GridItem shot={shots[7]} delay={360} className="row-span-2" />
+          
+          {/* Row 3 Middle: 2 small boxes */}
+          <GridItem shot={shots[6]} delay={420} className="col-span-2" />
         </div>
       </div>
     </section>

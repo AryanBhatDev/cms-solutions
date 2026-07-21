@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Reveal } from "./reveal";
 
@@ -43,25 +43,15 @@ export function Contact() {
 
               <div className="flex flex-col gap-4 bg-card p-7">
                 <span className="grid size-11 place-items-center rounded-md border border-primary/30 bg-primary/10 text-primary">
-                  <Phone className="size-5" />
+                  <Mail className="size-5" />
                 </span>
                 <p className="font-heading text-sm font-semibold text-foreground">Contact Us</p>
-                <div className="flex flex-col gap-2">
-                  <a
-                    href="mailto:info@cmrsolutions.com.au"
-                    className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <Mail className="size-3.5" />
-                    info@cmrsolutions.com.au
-                  </a>
-                  <a
-                    href="tel:+61861022880"
-                    className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <Phone className="size-3.5" />
-                    +61 (08) 6102 2880
-                  </a>
-                </div>
+                <a
+                  href="mailto:info@cmrsolutions.com.au"
+                  className="inline-flex items-center gap-1 text-sm leading-relaxed text-muted-foreground transition-colors hover:text-primary"
+                >
+                  info@cmrsolutions.com.au
+                </a>
               </div>
             </div>
           </Reveal>

@@ -22,9 +22,9 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[600px] items-center overflow-hidden border-b border-border pt-16 sm:min-h-[700px] lg:min-h-[800px] lg:max-h-[900px]"
+      className="relative flex min-h-svh items-center overflow-hidden border-b border-border pt-16"
     >
-      {/* Background Image */}
+      {/* Full background image like rksppr */}
       <div className="absolute inset-0 z-0">
         <Image
           src={heroImage}
@@ -35,15 +35,17 @@ export function Hero() {
           placeholder="blur"
           sizes="100vw"
           className="object-cover"
-          quality={80}
+          quality={85}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+        {/* Light mode: lighter gradients to show more image */}
+        {/* Dark mode: slightly stronger gradients for contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background from-20% via-background/60 to-transparent dark:from-background dark:from-25% dark:via-background/70 dark:to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent dark:from-background" />
       </div>
 
       {/* Subtle grid pattern */}
       <div 
-        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.02]"
         style={{
           backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
                            linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
@@ -79,7 +81,7 @@ export function Hero() {
               cursorClassName="bg-primary h-4 sm:h-5 md:h-6"
             />
             <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground">
-              Agile, scalable technology solutions tailored to your business — from managed services
+              Agile, scalable technology solutions tailored to your business — from software development
               to strategic consulting. We embed with your team to deliver outcomes that last.
             </p>
           </Reveal>
