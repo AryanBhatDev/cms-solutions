@@ -5,7 +5,6 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Reveal } from "./reveal";
 import { ScrollLink } from "./scroll-link";
 import heroImage from "@/public/images/hero.webp";
 
@@ -55,52 +54,46 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-20 lg:px-8">
         <div className="max-w-3xl">
-          <Reveal>
-            <h1 className="mt-6 text-balance font-heading text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              CMR Solutions
-            </h1>
-            {/* Sparkles under title - theme aware colors */}
-            <div className="relative h-8 w-full max-w-lg">
-              <SparklesCore
-                background="transparent"
-                minSize={0.6}
-                maxSize={1.4}
-                particleDensity={60}
-                className="h-full w-full"
-                particleColor="hsl(var(--primary))"
-                speed={0.4}
-              />
-            </div>
-          </Reveal>
-          
-          <Reveal delay={160}>
-            {/* Typewriter Effect - smaller font */}
-            <TypewriterEffectSmooth
-              words={words}
-              className="mt-2 justify-start text-left text-base sm:text-lg md:text-xl"
-              cursorClassName="bg-primary h-4 sm:h-5 md:h-6"
+          <h1 className="mt-6 text-balance font-heading text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            CMR Solutions
+          </h1>
+          {/* Sparkles under title - theme aware colors */}
+          <div className="relative h-8 w-full max-w-lg">
+            <SparklesCore
+              background="transparent"
+              minSize={0.6}
+              maxSize={1.4}
+              particleDensity={60}
+              className="h-full w-full"
+              particleColor="hsl(var(--primary))"
+              speed={0.4}
             />
-            <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground">
-              Agile, scalable technology solutions tailored to your business — from software development
-              to strategic consulting. We embed with your team to deliver outcomes that last.
-            </p>
-          </Reveal>
+          </div>
           
-          <Reveal delay={240}>
-            <div className="mt-8">
-              <Button
-                size="lg"
-                className="h-11 px-5 text-sm"
-                nativeButton={false}
-                render={
-                  <ScrollLink href="#contact">
-                    Get a Consultation
-                    <ArrowRight />
-                  </ScrollLink>
-                }
-              />
-            </div>
-          </Reveal>
+          {/* Typewriter Effect - smaller font */}
+          <TypewriterEffectSmooth
+            words={words}
+            className="mt-2 justify-start text-left text-base sm:text-lg md:text-xl"
+            cursorClassName="bg-primary h-4 sm:h-5 md:h-6"
+          />
+          <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground">
+            Agile, scalable technology solutions tailored to your business — from software development
+            to strategic consulting. We embed with your team to deliver outcomes that last.
+          </p>
+          
+          <div className="mt-8">
+            <Button
+              size="lg"
+              className="h-11 px-5 text-sm"
+              nativeButton={false}
+              render={
+                <ScrollLink href="#contact">
+                  Get a Consultation
+                  <ArrowRight />
+                </ScrollLink>
+              }
+            />
+          </div>
         </div>
       </div>
     </section>

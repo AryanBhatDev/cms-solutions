@@ -164,10 +164,10 @@
 /* scroll-triggered reveal - GPU accelerated */
 .reveal {
   opacity: 0;
-  transform: translateY(24px) translateZ(0);
+  transform: translateY(16px) translateZ(0);
   transition:
-    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
   backface-visibility: hidden;
 }
